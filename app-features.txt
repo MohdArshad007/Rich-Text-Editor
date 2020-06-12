@@ -1,0 +1,23 @@
+	save file in localstorage()
+	bootstrap modal to show all save file
+	open file in editor
+
+execCommand(command,false,null);
+font-family /
+font-size /
+alignment /
+indent /
+unindent /
+copy /
+cut /
+bold /
+italic /
+underline /
+strikethrough /
+superscript /
+subscript /
+link /
+unlink /
+color /
+bg-color /
+insertimage /

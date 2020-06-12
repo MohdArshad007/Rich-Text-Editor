@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Mohd Arshad">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Advance Text Editor</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <!-- MAIN CONTAINER BOX FOR ALL ELEMENT -->
+    <div class="container">
+        <!-- CMD BOX IS FOR ALL COMMAND -->
+        <div class="cmd-box p-3">
+            <!-- EDITOR ON OR OFF CODING -->
+            <button class="btn" id="editor-on" onclick="editorOnOff(this)">Editor On</button>
+            <!-- SAVE FILE BOX -->
+            <div class="save-box">
+                <div class="input-group">
+                    <input type="text" id="file-name" class="form-controll"/>
+                    <div class="input-group-prepend">
+                        <button class="input-group-text btn btn-success" onclick="save()">Save</button>
+                    </div>
+                </div>
+            </div>
+            <!-- EDITOR TO HTML TOGGLE -->
+            <div class="feature-box">
+                <div class="btn-group">
+                    <button class="btn btn-dark active rounded-0" onclick="editorToggle(this);">
+                        <i class="fa fa-code"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="format-box">
+                <select oninput="myCmdWithArg('fontName',this.value)">
+                    <option value="Arial">Arial</option>
+                    <option value="courier">Courier</option>
+                    <option value="georgia">Georgia</option>
+                    <option value="helvetica">Helvetica</option>
+                    <option value="times">Times</option>
+                    <option value="trebuchet">Trebuchet</option>
+                    <option value="verdana">Verdana</option>
+                    <option value="impact">Impact</option>
+                </select>
+                <select oninput="myCmdWithArg('fontSize',this.value)">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+                <br>
+                <button onclick="myCmd('bold');" class="formating" title="bold">
+                    <i class="fa fa-bold"></i>
+                </button>
+                <button onclick="myCmd('italic');" class="formating" title="italic">
+                    <i class="fa fa-italic"></i>
+                </button>
+                <button onclick="myCmd('underline');" class="formating" title="underline">
+                    <i class="fa fa-underline"></i>
+                </button>
+                <button onclick="myCmd('justifyLeft');" class="formating" title="Left">
+                    <i class="fa fa-align-left"></i>
+                </button>
+                <button onclick="myCmd('justifyCenter');" class="formating" title="Center">
+                    <i class="fa fa-align-center"></i>
+                </button>
+                <button onclick="myCmd('justifyRight');" class="formating" title="Right">
+                    <i class="fa fa-align-right"></i>
+                </button>
+                <br>
+                <button onclick="myCmd('justifyFull');" class="formating" title="Justify">
+                    <i class="fa fa-align-justify"></i>
+                </button>
+                <button onclick="myCmd('strikethrough');" class="formating" title="strikethrought">
+                    <i class="fa fa-strikethrough"></i>
+                </button>
+                <button onclick="myCmd('indent');" title="Indent" class="formating">
+                    <i class="fa fa-indent"></i>
+                </button>
+                <button onclick="myCmd('outdent');" title="Outdent" class="formating">
+                    <i class="fa fa-outdent"></i>
+                </button>
+                <button onclick="myCmd('subscript');" title="Sub script" class="formating">
+                    <i class="fa fa-subscript"></i>
+                </button>
+                <button onclick="myCmd('superscript');" title="Super script" class="formating">
+                    <i class="fa fa-superscript"></i>
+                </button>
+            </div>
+            <div class="link-box">
+                <button onclick="myCmdWithArg('createLink',prompt('Enter link url','https://'));" title="Add Link" class="formating">
+                    <i class="fa fa-link"></i>
+                </button>
+                <button onclick="myCmd('unlink');" title="Unlink" class="formating">
+                    <i class="fa fa-unlink"></i>
+                </button>
+                <button onclick="myCmdWithArg('insertImage',prompt('Enter Image URL','https://picsum.photos/200/300'));" title="Insert Image" class="formating">
+                    <i class="fa fa-file-image"></i>
+                </button>
+                <button onclick="myCmd('insertOrderedList');" title="Insert Ordered List" class="formating">
+                    <i class="fa fa-list-ol"></i>
+                </button>
+                <button onclick="myCmd('insertUnorderedList');" title="Insert Unordered List" class="formating">
+                    <i class="fa fa-list-ul"></i>
+                </button>
+                <button onclick="myCmd('undo')" class="formating" title="undo">
+                    <i class="fa fa-undo-alt"></i>
+                </button>
+                <button onclick="myCmd('redo')" class="formating" title="redo">
+                    <i class="fa fa-redo-alt"></i>
+                </button>
+                <button onclick="myCmd('copy')" class="formating" title="copy">
+                    <i class="fa fa-copy"></i>
+                </button>
+                <button onclick="myCmd('cut')" class="formating" title="cut">
+                    <i class="fa fa-cut"></i>
+                </button>
+                <select oninput="myCmdWithArg('formatBlock',this.value);">
+                    <option value="H1">H1</option>
+                    <option value="H2">H2</option>
+                    <option value="H3">H3</option>
+                    <option value="H4">H4</option>
+                    <option value="H5">H5</option>
+                    <option value="H6">H6</option>
+                </select>
+            </div>
+
+            <div class="color-box ml-2">
+                <span>Text Color</span>
+                <input type="color" oninput="myCmdWithArg('foreColor',this.value)">
+                <span>BG Color</span>
+                <input type="color" oninput="myCmdWithArg('backColor',this.value)">
+            </div>            
+        </div>
+
+        <!-- IFRAM WORKBOOK IS FOR WRITING  -->
+        <iframe name="workbook"></iframe>
+    </div>
+    <!-- SAVE FILE ARE SHOW HERE -->
+    <button id="open-file" class="btn btn-primary" data-target="#allFiles" data-toggle="modal">Open Files</button>
+    <!-- MODAL CODING -->
+    <div class="modal animated slideInDown" id="allFiles"> 
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-light rounded-0">
+                    <h1>Click to Open</h1>
+                    <i class="fa fa-times" data-dismiss="modal" id="hideModal"></i>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>File Name</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody" class="text-center">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ALL ALL SCRIPT FILE -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/logic.js"></script>
+</body>
+</html>
